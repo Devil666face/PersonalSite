@@ -1,0 +1,37 @@
+{% load static %}
+{% for card in articles %}
+{% if card.published %}
+<div class="card text-bg-dark text-center mb-3">
+  <div class="card-header">
+    <a href="{{ card.category.get_absolute_url }}" class="list-group-item">{{card.category|capfirst}}</a>
+  </div>
+
+  <div class="card-body">
+    <div class="media">
+      {% if card.photo %}
+      <img src="{{ card.photo.url }}" class="card-img" alt="{card.title}">
+      {% endif %}
+      <div class="media-body  mt-3">
+        <h5 class="card-title">{{card.title|capfirst}}</h5>
+        <p class="card-text">{{card.content|capfirst|linebreaks|truncatewords:50}}</p>
+
+        <a href="{{card.get_absolute_url}}" class="btn btn-primary">
+
+          <lord-icon
+                  src="{% static 'lordicon/mrjuyheh.js' %}"
+                  trigger="hover"
+                  style="width:32px;height:32px">
+          </lord-icon>
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-footer text-muted">
+    {{card.update_at | date:"d.m.Y H:i"}}
+  </div>
+</div>
+{% endif %}
+{% empty %}
+<h5 class="card-title">Пока нет никаких постов</h5>
+{% endfor %}

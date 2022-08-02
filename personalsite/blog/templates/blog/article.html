@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title_current%}
+<h1>{{article_item.title}}</h1>
+{% endblock %}
+
+{% block article %}
+<div class="row">
+  <div class="col-12 bg-light p-3 border rounded">
+    <div class="card text-bg-dark text-center mb-3">
+      <div class="card-header">
+        <a href="{{ article_item.category.get_absolute_url }}" class="list-group-item">{{article_item.category|capfirst}}</a>
+      </div>
+
+      <div class="card-body">
+        <div class="media">
+          {% if article_item.photo %}
+          <img src="{{ article_item.photo.url }}" class="card-img" alt="{article_item.title}">
+          {% endif %}
+          <div class="media-body  mt-3">
+            <h5 class="card-title">{{article_item.title|capfirst}}</h5>
+            <p class="card-text">{{article_item.content|capfirst|linebreaks}}</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-footer text-muted">
+        {{article_item.update_at | date:"d.m.Y H:i"}}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

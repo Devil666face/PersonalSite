@@ -1,0 +1,16 @@
+{% load blog_tags %}
+
+{% comment %}
+<div class="list-group mb-3">
+  {% get_categories as categories%}
+  {% for cat in categories %}
+  {% if cat == category %}
+  <a href="{{cat.get_absolute_url}}" class="list-group-item list-group-item-action active bg-dark border-dark">{{cat.title}}</a>
+  {% else %}
+  <a href="{{cat.get_absolute_url}}" class="list-group-item list-group-item-action">{{cat.title}}</a>
+  {% endif %}
+  {% endfor %}
+</div>
+{% endcomment %}
+
+{% show_categories category %}
