@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title_current%}
-<h1>{{article_item.title}}</h1>
-{% endblock %}
+{% block title %}{{article_item|capfirst}}{% endblock title %}
+
+{% block title_current %}
+<div class="mt-5 pt-3"><h1>{{article_item|capfirst}}</h1></div>    
+{% endblock title_current %}
 
 {% block article %}
-<div class="row">
+<div class="row mt-3 mb-5">
   <div class="col-12 bg-light p-3 border rounded">
     <div class="card text-bg-dark text-center mb-3">
       <div class="card-header">

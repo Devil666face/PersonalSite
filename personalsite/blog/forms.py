@@ -1,5 +1,7 @@
 from django import forms
 from .models import Category, Article
+from django.core.exceptions import ValidationError
+import re
 
 # Создаваемая в ручную форма
 # class ArtcileForm(forms.Form):
@@ -18,10 +20,20 @@ class ArtcileForm(forms.ModelForm):
     class Meta:
         model = Article
         # fields = '__all__'
-        fields = ['title','content','published','category','photo','file']
+        fields = ['title','content','category','photo','file','published']
         widgets = {
             'title':forms.TextInput(attrs = {"class":"form-control"}),
             'content':forms.Textarea(attrs = {"class":"form-control","rows":5}),
             'category':forms.Select(attrs = {"class":"form-control"}),
+            'photo':forms.FileInput(attrs = {"class":"form-control"}),
+            'file':forms.FileInput(attrs = {"class":"form-control"}),
+            'published':forms.CheckboxInput(attrs = {"class":"form-check"}),
             
         }
+
+    # Валидация поля title
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if re.match('\d', title):
+            raise ValidationError('Название не должно начинаться с цифры')
+        return title

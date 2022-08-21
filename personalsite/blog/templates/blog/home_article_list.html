@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }} :: {{ block.super }}    
+{% endblock title %}
+
+{% block home %}
+<div class="row mb-5">
+    <div class="col-md-3 bg-light p-3 border rounded">
+        {% include 'blog/include/_sidebar.html' %}
+    </div>
+    <div class="col-md-9 bg-light p-3 border rounded">
+        {% include 'blog/include/_cards.html' %}
+    </div>
+</div>
+{% endblock %}

@@ -1,6 +1,5 @@
 {% load static %}
 {% for card in articles %}
-{% if card.published %}
 <div class="card text-bg-dark text-center mb-3">
   <div class="card-header">
     <a href="{{ card.category.get_absolute_url }}" class="list-group-item">{{card.category|capfirst}}</a>
@@ -15,8 +14,7 @@
         <h5 class="card-title">{{card.title|capfirst}}</h5>
         <p class="card-text">{{card.content|capfirst|linebreaks|truncatewords:50}}</p>
 
-        <a href="{{card.get_absolute_url}}" class="btn btn-primary">
-
+        <a href="{{card.get_absolute_url}}" class="btn btn-outline-light">
           <lord-icon
                   src="{% static 'lordicon/mrjuyheh.js' %}"
                   trigger="hover"
@@ -31,7 +29,6 @@
     {{card.update_at | date:"d.m.Y H:i"}}
   </div>
 </div>
-{% endif %}
 {% empty %}
 <h5 class="card-title">Пока нет никаких постов</h5>
 {% endfor %}

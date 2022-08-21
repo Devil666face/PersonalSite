@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block article %}
-<div class="row">
+<div class="row mt-5 mb-5">
     <div class="col-12 bg-light p-3 border rounded">
         <form action="{% url 'add_artcile' %}" method="post">
             {% csrf_token %}

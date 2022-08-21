@@ -2,33 +2,79 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Article, Category
 from .forms import ArtcileForm
 
-# Create your views here.
+#Class view paradigm
+from django.views.generic import ListView, DetailView
 
-def home_page(request):
-    # Articles = Article.objects.order_by('-created_at')
-    articles = Article.objects.all()
-    context = {
-        'articles': articles,
-        'title': 'Все посты',
-    }
-    return render(request, template_name='blog/home.html', context=context)
+class HomeArticle(ListView):
+    model = Article
+    template_name = 'blog/home_article_list.html'
+    context_object_name = 'articles'
+    # extra_context = {
+    #     'title':'Главная'
+    # }
 
-def get_category(request, category_id):
-    articles = Article.objects.filter(category_id = category_id)
-    category = Category.objects.get(pk=category_id)
-    context = {
-        'articles': articles,
-        'category': category,
-    }
-    return render(request,template_name='blog/home.html', context=context)
+    def get_context_data(self, *, object_list = None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Главная страница'
+        context['title_current'] = 'Главная'
+        return context
 
-def  view_article(request, article_id):
-    # article_item = Article.objects.get(pk=article_id)
-    article_item = get_object_or_404(Article, pk=article_id)
-    context = {
-        'article_item': article_item,
-    }
-    return render(request,template_name='blog/article.html',context=context)
+    def get_queryset(self):
+        return Article.objects.filter(published=True)
+
+# def home_page(request):
+#     # Articles = Article.objects.order_by('-created_at')
+#     articles = Article.objects.all()
+#     context = {
+#         'articles': articles,
+#         'title': 'Все посты',
+#     }
+#     return render(request, template_name='blog/home.html', context=context)
+
+class ArticleByCategory(ListView):
+    model = Article
+    template_name = 'blog/home_article_list.html'
+    context_object_name = 'articles'
+    # allow_empty = False #Запрещаем показ пустых списков
+
+    def get_context_data(self, *, object_list = None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category = Category.objects.get(pk=self.kwargs['category_id'])
+        context['title'] = category
+        context['title_current'] = category
+        context['category'] = category
+        return context
+    
+    def get_queryset(self):
+        return Article.objects.filter(category_id = self.kwargs['category_id'], published=True)
+
+# def get_category(request, category_id):
+#     articles = Article.objects.filter(category_id = category_id)
+#     category = Category.objects.get(pk=category_id)
+#     context = {
+#         'articles': articles,
+#         'category': category,
+#     }
+#     return render(request,template_name='blog/home.html', context=context)
+
+class ViewArticle(DetailView):
+    model = Article
+    # template_name = 'blog/article_detail.html'
+    # pk_url_kwarg = 'article_id'
+    context_object_name = 'article_item'
+
+
+    def get_context_data(self, *, object_list = None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+# def  view_article(request, article_id):
+#     # article_item = Article.objects.get(pk=article_id)
+#     article_item = get_object_or_404(Article, pk=article_id)
+#     context = {
+#         'article_item': article_item,
+#     }
+#     return render(request,template_name='blog/article.html',context=context)
 
 def add_article(request):
     if request.method == 'POST':
