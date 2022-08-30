@@ -7,6 +7,7 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         return reverse('article',kwargs={"pk": self.pk})
+        # return reverse('article',args=str(self.pk))
 
     class Meta:
         verbose_name = 'Пост'
@@ -20,7 +21,7 @@ class Article(models.Model):
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/',blank=True, verbose_name='Фото')
     file = models.FileField(upload_to='files/%Y/%m/%d/',blank=True, verbose_name='Прикрепленный файл')
     published = models.BooleanField(default=True, verbose_name='Опубликовано')
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Категория')
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Категория', related_name='get_articles')
 
 class Category(models.Model):
     def __str__(self):

@@ -8,6 +8,6 @@ urlpatterns = [
     path('category/<int:category_id>/', ArticleByCategory.as_view(), name='category'),
     # path('article/<int:article_id>/', view_article, name='article'),
     path('article/<int:pk>/', ViewArticle.as_view(), name='article'),
-
-    path('article/add-article/', add_article, name='add_artcile'),
+    # path('article/add-article/', add_article, name='add_artcile'),
+    path('article/add-article/', CreateArticle.as_view(), name='add_artcile'),
 ]

@@ -33,13 +33,23 @@
 </li>
 
 <li class="nav-item">
+    <a class="nav-link" href="{% url 'admin:index'%}">
+        <lord-icon
+        src="{% static 'lordicon/admin.js' %}"
+        trigger="hover"
+        style="width:32px;height:32px">
+    </lord-icon>
+    Управление</a>
+</li>
+
+<li class="nav-item">
     <a class="nav-link" href="https://t.me/petya_petrov">
         <lord-icon
         src="{% static 'lordicon/telegram.js' %}"
         trigger="hover"
         style="width:32px;height:32px">
     </lord-icon>
-Телеграм</a>
+    Телеграм</a>
 </li>
 </ul>
 <form class="d-flex" role="search">
