@@ -22,6 +22,7 @@ class Article(models.Model):
     file = models.FileField(upload_to='files/%Y/%m/%d/',blank=True, verbose_name='Прикрепленный файл')
     published = models.BooleanField(default=True, verbose_name='Опубликовано')
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Категория', related_name='get_articles')
+    views = models.IntegerField(default=0)    
 
 class Category(models.Model):
     def __str__(self):

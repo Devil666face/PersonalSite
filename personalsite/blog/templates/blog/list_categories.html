@@ -1,9 +1,17 @@
 <div class="list-group mb-3">
   {% for cat in categories %}
   {% if cat == category %}
-  <a href="{{cat.get_absolute_url}}" class="list-group-item list-group-item-action active bg-dark border-dark">{{cat.title}}</a>
+  <a href="{{cat.get_absolute_url}}" class="list-group-item list-group-item-action active bg-dark border-dark">{{cat.title}}
+    <span class="badge text-bg-secondary">
+      {{cat.cnt}}
+    </span>
+  </a>
   {% else %}
-  <a href="{{cat.get_absolute_url}}" class="list-group-item list-group-item-action">{{cat.title}}</a>
+  <a href="{{cat.get_absolute_url}}" class="list-group-item list-group-item-action">{{cat.title}}
+    <span class="badge text-bg-secondary">
+      {{cat.cnt}}
+    </span>
+  </a>
   {% endif %}
   {% endfor %}
 </div>

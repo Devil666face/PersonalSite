@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 
 class HomeArticle(ListView):
     model = Article
-    template_name = 'blog/home_article_list.html'
+    template_name = 'blog/home.html'
     context_object_name = 'articles'
     # extra_context = {
     #     'title':'Главная'
@@ -22,7 +22,7 @@ class HomeArticle(ListView):
         return context
 
     def get_queryset(self):
-        return Article.objects.filter(published=True)
+        return Article.objects.filter(published=True).select_related('category')
 
 # def home_page(request):
 #     # Articles = Article.objects.order_by('-created_at')
@@ -35,7 +35,7 @@ class HomeArticle(ListView):
 
 class ArticleByCategory(ListView):
     model = Article
-    template_name = 'blog/home_article_list.html'
+    template_name = 'blog/home.html'
     context_object_name = 'articles'
     # allow_empty = False #Запрещаем показ пустых списков
 
@@ -48,7 +48,7 @@ class ArticleByCategory(ListView):
         return context
     
     def get_queryset(self):
-        return Article.objects.filter(category_id = self.kwargs['category_id'], published=True)
+        return Article.objects.filter(category_id = self.kwargs['category_id'], published=True).select_related('category')
 
 # def get_category(request, category_id):
 #     articles = Article.objects.filter(category_id = category_id)

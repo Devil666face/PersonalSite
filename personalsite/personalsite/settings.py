@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-9!2kur-tkzc+tzknn7in3(tu7$*7!bnewwi5s^d%gvriq07s@b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.148.13.20','127.0.0.1','5.143.241.245']
+ALLOWED_HOSTS = ['*','10.148.13.20','127.0.0.1','5.143.241.245']
 
 
 # Application definition
@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'blog.apps.BlogConfig',
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -48,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'personalsite.urls'
@@ -128,3 +132,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = 'media/'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]

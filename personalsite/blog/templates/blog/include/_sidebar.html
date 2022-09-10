@@ -1,5 +1,7 @@
 {% load blog_tags %}
 
+{% show_categories category %}
+
 {% comment %}
 <div class="list-group col-md-3">
   {% get_categories as categories%}
@@ -12,5 +14,3 @@
   {% endfor %}
 </div>
 {% endcomment %}
-
-{% show_categories category %}

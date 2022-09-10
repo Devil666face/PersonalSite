@@ -1,5 +1,6 @@
 from django import template
 from blog.models import Category
+from django.db.models import Count
 
 register = template.Library()
 
@@ -9,5 +10,7 @@ def get_categories():
 
 @register.inclusion_tag('blog/list_categories.html')
 def show_categories(category):
-    categories = Category.objects.all()
+    # Убираем категории без статей
+    # categories = Category.objects.all()
+    categories = Category.objects.annotate(cnt=Count('get_articles')).filter(cnt__gt=0)
     return {'categories':categories,'category':category}
