@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['*','10.148.13.20','127.0.0.1','5.143.241.245']
 # Application definition
 
 INSTALLED_APPS = [
+    "admin_interface", #Кастомизация админки
+    "colorfield", #Кастомизация админки
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -136,3 +138,7 @@ MEDIA_URL = 'media/'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+# Кастомизация админки
+X_FRAME_OPTIONS = "SAMEORIGIN"
+SILENCED_SYSTEM_CHECKS = ["security.W019"]
