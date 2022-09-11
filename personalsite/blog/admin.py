@@ -10,6 +10,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_filter = ('published', 'category','created_at')
     fields = ('title','photo','get_photo','content','created_at','update_at','category','published')
     readonly_fields = ('get_photo','created_at','update_at')
+    save_on_top = True
     # fieldsets есть такой метод для большей кастомизации
     def get_photo(self, obj):
         return mark_safe(f'<img src="{obj.photo.url}" width="150">') if obj.photo else '❌'

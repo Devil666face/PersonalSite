@@ -1,16 +1,29 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Article, Category
 from .forms import ArtcileForm
-
+# Login
+from django.contrib.auth.mixins import LoginRequiredMixin
 #Class view paradigm
 from django.views.generic import ListView, DetailView, CreateView
-
 from django.urls import reverse_lazy
+# Paginator
+from django.core.paginator import Paginator
+# mixin
+# from .utils import Mixin
+
+# def get_paginating(request):
+    # articles = Article.objects.all()
+    # paginator = Paginator(articles, 3)
+    # page_num = request.GET.get('page', 1)
+    # page_obj = paginator.get_page(page_num)
+    # 
+    
 
 class HomeArticle(ListView):
     model = Article
     template_name = 'blog/home.html'
     context_object_name = 'articles'
+    paginate_by = 2
     # extra_context = {
     #     'title':'Главная'
     # }
@@ -77,9 +90,12 @@ class ViewArticle(DetailView):
 #     }
 #     return render(request,template_name='blog/article.html',context=context)
 
-class CreateArticle(CreateView):
+class CreateArticle(LoginRequiredMixin, CreateView):
     form_class = ArtcileForm #Имя класса формы
     template_name = 'blog/add_article.html'
+    login_url = '/admin/'
+    # raise_exception = True Ошибка если пользователь не авторизован
+    # login_url = reverse_lazy('home')
     # success_url = reverse_lazy('home')
 
 # def add_article(request):

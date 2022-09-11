@@ -21,7 +21,9 @@
             </lord-icon>
         Войти</a>
     </li>
-
+    
+    {% if request.user.is_authenticated %}
+        
     <li class="nav-item">
         <a class="nav-link" href="{% url 'add_artcile'%}">
             <lord-icon
@@ -30,8 +32,10 @@
             style="width:32px;height:32px">
         </lord-icon>
     Добавить пост</a>
-</li>
+    </li>
 
+    {% endif %}
+        
 <li class="nav-item">
     <a class="nav-link" href="{% url 'admin:index'%}">
         <lord-icon
