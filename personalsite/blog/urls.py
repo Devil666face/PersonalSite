@@ -10,4 +10,6 @@ urlpatterns = [
     path('article/<int:pk>/', ViewArticle.as_view(), name='article'),
     # path('article/add-article/', add_article, name='add_artcile'),
     path('article/add-article/', CreateArticle.as_view(), name='add_artcile'),
+    path('register/',register, name='register'),
+    path('login/',login, name='login'),
 ]

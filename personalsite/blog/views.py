@@ -1,3 +1,4 @@
+from email import message
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Article, Category
 from .forms import ArtcileForm
@@ -10,6 +11,10 @@ from django.urls import reverse_lazy
 from django.core.paginator import Paginator
 # mixin
 # from .utils import Mixin
+# register and login
+from django.contrib.auth.forms import UserCreationForm
+
+from django.contrib import messages
 
 # def get_paginating(request):
     # articles = Article.objects.all()
@@ -17,13 +22,28 @@ from django.core.paginator import Paginator
     # page_num = request.GET.get('page', 1)
     # page_obj = paginator.get_page(page_num)
     # 
-    
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Пользователь создан.')
+            return redirect('login')
+        else:
+            messages.error(request,f'Ошибка регистрации.')
+    else:
+        form = UserCreationForm()
+    return render(request, 'blog/register.html', {"form":form})
+
+def login(request):
+    return render(request, 'blog/login.html')    
 
 class HomeArticle(ListView):
     model = Article
     template_name = 'blog/home.html'
     context_object_name = 'articles'
-    paginate_by = 2
+    paginate_by = 5
     # extra_context = {
     #     'title':'Главная'
     # }
@@ -50,6 +70,7 @@ class ArticleByCategory(ListView):
     model = Article
     template_name = 'blog/home.html'
     context_object_name = 'articles'
+    paginate_by = 5
     # allow_empty = False #Запрещаем показ пустых списков
 
     def get_context_data(self, *, object_list = None, **kwargs):
@@ -110,3 +131,4 @@ class CreateArticle(LoginRequiredMixin, CreateView):
 #     else:
 #         article_add_form = ArtcileForm()
 #     return render(request, 'blog/add_artcile.html', {'article_add_form': article_add_form})
+

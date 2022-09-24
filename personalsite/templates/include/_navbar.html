@@ -2,6 +2,22 @@
 <nav class="navbar bg-dark fixed-top mb-3 border rounded">
   <div class="container-fluid">
     <a class="navbar-brand text-light" href="{% url 'home'%}">🐗Petya Petrov</a>
+    <a class="navbar-brand text-light" href="{% url 'register'%}">
+        <lord-icon
+        src="{% static 'lordicon/enter.js' %}"
+        trigger="hover"
+        style="width:32px;height:32px">
+    </lord-icon>
+    Регистрация</a>
+
+    |<a class="navbar-brand text-light center" href="{% url 'login'%}">
+        <lord-icon
+        src="{% static 'lordicon/enter.js' %}"
+        trigger="hover"
+        style="width:32px;height:32px">
+    </lord-icon>
+    Войти</a>
+
     <button class="navbar-toggler bg-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>
   </button>
@@ -12,15 +28,7 @@
     </div>
     <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'add_artcile'%}">
-                <lord-icon
-                src="{% static 'lordicon/enter.js' %}"
-                trigger="hover"
-                style="width:32px;height:32px">
-            </lord-icon>
-        Войти</a>
-    </li>
+         
     
     {% if request.user.is_authenticated %}
         

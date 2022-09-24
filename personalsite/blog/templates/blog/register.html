@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block article %}
+<div class="row mb-3 mt-2">
+    <h1>Регистрация</h1>
+    <div class="col-12 bg-light p-3 border rounded">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-primary bg-dark border-dark mt-3 form-control">Создать пользователя</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
