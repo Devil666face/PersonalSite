@@ -11,5 +11,6 @@ urlpatterns = [
     # path('article/add-article/', add_article, name='add_artcile'),
     path('article/add-article/', CreateArticle.as_view(), name='add_artcile'),
     path('register/',register, name='register'),
-    path('login/',login, name='login'),
+    path('login/',user_login, name='login'),
+    path('logout/',user_logout, name='logout'),
 ]

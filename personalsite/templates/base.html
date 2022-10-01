@@ -11,31 +11,30 @@
     </head>
     <body>
         {% include 'include/_navbar.html' %}
-        <div class="container">
-            {% block title_current %}
-            <div class="mt-5 pt-3"><h1>{{title_current}}</h1></div>
-            {% endblock title_current %}
-            
-            
             {% if messages %}
-                
-                {% for message in messages %}
-                    
-                {% if message.tags == 'error' %}
-                    <div class="alert alert-danger" role="alert">{{message}}</div>
-                {% else %}
-                    <div class="alert alert-{{message.tags}}" role="alert">{{message}}</div>
-                {% endif %}
-                    
-                {% endfor %}
-                    
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-danger" role="alert">{{message}}</div>
+            {% else %}
+                <div class="alert alert-{{message.tags}}" role="alert">{{message}}</div>
             {% endif %}
-                
+            {% endfor %}                    
+            {% endif %}
 
-            {% block home %}{% endblock %}
+        <div class="container">
+            {% if request.user.is_authenticated %}
+                {% block title_current %}
+                <div class="mt-5 pt-3"><h1>{{title_current}}</h1></div>
+                {% endblock title_current %}
+                    
+                {% block home %}{% endblock %}
+                
+                {% block article %}{% endblock %}
+            {% endif %}
             
-            {% block article %}{% endblock %}
+            {% block form %}{% endblock %}
         </div>
+        
         <!--<script src="https://cdn.lordicon.com/xdjxvujz.js"></script>-->
         <script src="{% static 'lordicon/xdjxvujz.js'%}"></script>
         <script src="{% static 'js/bootstrap.bundle.min.js' %}" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>

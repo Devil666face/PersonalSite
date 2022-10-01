@@ -2,34 +2,50 @@
 <nav class="navbar bg-dark fixed-top mb-3 border rounded">
   <div class="container-fluid">
     <a class="navbar-brand text-light" href="{% url 'home'%}">🐗Petya Petrov</a>
-    <a class="navbar-brand text-light" href="{% url 'register'%}">
-        <lord-icon
-        src="{% static 'lordicon/enter.js' %}"
-        trigger="hover"
-        style="width:32px;height:32px">
-    </lord-icon>
-    Регистрация</a>
-
-    |<a class="navbar-brand text-light center" href="{% url 'login'%}">
-        <lord-icon
-        src="{% static 'lordicon/enter.js' %}"
-        trigger="hover"
-        style="width:32px;height:32px">
-    </lord-icon>
-    Войти</a>
-
+    
     <button class="navbar-toggler bg-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>
   </button>
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">🐗Petya Petrov</h5>
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">{{user.first_name|capfirst}} {{user.last_name|capfirst}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-         
-    
+            {% if not request.user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'register'%}">
+                    <lord-icon
+                    src="{% static 'lordicon/enter.js' %}"
+                    trigger="hover"
+                    style="width:32px;height:32px">
+                </lord-icon>
+                Регистрация</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login'%}">
+                    <lord-icon
+                    src="{% static 'lordicon/enter.js' %}"
+                    trigger="hover"
+                    style="width:32px;height:32px">
+                </lord-icon>
+                Войти</a>    
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout'%}">
+                    <lord-icon
+                    src="{% static 'lordicon/enter.js' %}"
+                    trigger="hover"
+                    style="width:32px;height:32px">
+                </lord-icon>
+                Выйти</a>    
+            </li>
+
+            {% endif %}
+
     {% if request.user.is_authenticated %}
         
     <li class="nav-item">
