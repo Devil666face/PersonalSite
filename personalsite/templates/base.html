@@ -22,7 +22,7 @@
             {% endif %}
 
         <div class="container">
-            {% if request.user.is_authenticated %}
+            
                 {% block title_current %}
                 <div class="mt-5 pt-3"><h1>{{title_current}}</h1></div>
                 {% endblock title_current %}
@@ -30,7 +30,7 @@
                 {% block home %}{% endblock %}
                 
                 {% block article %}{% endblock %}
-            {% endif %}
+            
             
             {% block form %}{% endblock %}
         </div>

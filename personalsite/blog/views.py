@@ -126,7 +126,7 @@ class ViewArticle(DetailView):
 class CreateArticle(LoginRequiredMixin, CreateView):
     form_class = ArtcileForm #Имя класса формы
     template_name = 'blog/add_article.html'
-    login_url = '/admin/'
+    login_url = '/login/'
     # raise_exception = True Ошибка если пользователь не авторизован
     # login_url = reverse_lazy('home')
     # success_url = reverse_lazy('home')
